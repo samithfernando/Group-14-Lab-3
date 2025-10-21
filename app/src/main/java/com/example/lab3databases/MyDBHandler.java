@@ -57,16 +57,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_NAME + " ";
 
         if (!productName.isEmpty() && !productPrice.isEmpty()){
-            query += "WHERE name = ? AND price = ?";
-            return db.rawQuery(query,new String[]{productName,productPrice});
+            query += "WHERE name LIKE ? AND price = ?";
+            return db.rawQuery(query,new String[]{productName+"%",productPrice});
         }
         else if (productName.isEmpty()){
             query += "WHERE price = ?";
             return db.rawQuery(query,new String[]{productPrice});
         }
         else {
-            query += "WHERE name = ?";
-            return db.rawQuery(query,new String[]{productName});
+            query += "WHERE name LIKE ?";
+            return db.rawQuery(query,new String[]{productName+"%"});
         }
 
     }
